@@ -1,29 +1,38 @@
 # Systemize TX — Website
 
-Premium, minimal, one-page site for **Systemize TX** — the systems people who use AI.
-We systemize operations-heavy Texas businesses: one AI-native operating system the whole
-company runs on, built custom, hosted and run by us.
+Premium, minimal, one-page site for **Systemize TX**, the systems people who use AI.
+We systemize Texas businesses: one AI native operating system the whole company runs on,
+built custom, hosted and run by us.
 
 ## Design system
 
-- **Palette — the exact Texas flag colors** (Texas Legislature, 2001):
-  - Blue `#00205B` (Pantone 281) — loyalty
-  - Red `#BF0A30` (Pantone 193) — bravery
-  - White / warm paper `#F7F5F0` — purity
+- **Palette, the exact Texas flag colors** (Texas Legislature, 2001):
+  - Blue `#00205B` (Pantone 281), loyalty
+  - Red `#BF0A30` (Pantone 193), bravery
+  - White / warm paper `#F7F5F0`, purity
 - **Type**: Fraunces (display serif) + Inter (UI sans), via Google Fonts with system fallbacks.
-- **Motion**: preloader star draw · hero city slideshow (5 Texas skylines as custom SVG
-  silhouettes, Ken Burns skies) · kinetic word-mask headline · scroll-lit manifesto ·
+- **Motion**: preloader star draw · hero slideshow of five Texas cities (real photography,
+  brand tinted, slow Ken Burns) · kinetic word-mask headline · editorial pain-point list ·
   sticky "tools converge into one system" scene · staggered reveals · count-up stats ·
   self-drawing Texas map · full `prefers-reduced-motion` support.
 
+## Page structure
+
+Hero (city slideshow) → 01 The Problem → 02 The System → 03 The Outcomes →
+04 The Partnership → 05 The Process → 06 Texas → Booking (calendar embed) → Footer.
+
+No pricing appears anywhere on the site by design. The close is the free operational
+briefing, booked via the calendar section.
+
 ## Stack
 
-Zero dependencies. Pure HTML + CSS + vanilla JS — no build step, no frameworks, nothing to break.
+Zero dependencies. Pure HTML + CSS + vanilla JS. No build step, no frameworks.
 
 ```
 index.html      the whole page
 css/style.css   design system + animations
 js/main.js      slideshow, scroll choreography, reveals
+assets/img/     hero photography (five Texas cities)
 ```
 
 ## Run it
@@ -39,7 +48,17 @@ Deploys as-is to GitHub Pages, Netlify, Vercel, or any static host.
 
 ## Editing quick-reference
 
+- **Calendar embed**: paste your Calendly / Cal.com embed inside `.booking__embed`
+  in `index.html` (a comment marks the spot) and delete the placeholder block.
 - **Contact email**: search `hello@systemizetx.com` in `index.html`.
-- **Slideshow cities/lines**: the `data-city` / `data-line` attributes on each `.hero-slide`.
-- **Pricing & offer copy**: the `#offer` section — keep in sync with the canonical offer doc.
+- **Slideshow cities/lines**: the `data-city` / `data-line` attributes on each `.hero-slide`,
+  plus the matching photo in `assets/img/`.
 - **Colors**: CSS custom properties at the top of `css/style.css`.
+
+## Photo credits (Wikimedia Commons)
+
+- Austin: "Austin Texas skyline at dusk in 2016" — CC BY 2.0
+- Dallas: "Dallas Skyline at Dusk" — CC BY-SA 4.0
+- Houston: "Houston, Texas" by Carol M. Highsmith — Public domain
+- Fort Worth: "Fort Worth Skyline at Sunset" — CC BY 2.0
+- San Antonio: "San Antonio blue hour" — CC BY 2.0

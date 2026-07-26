@@ -1,5 +1,5 @@
 /* ============================================================
-   SYSTEMIZE TX — scroll choreography & interactions
+   SYSTEMIZE TX scroll choreography & interactions
    Vanilla JS, no dependencies. Everything degrades gracefully.
    ============================================================ */
 (function () {
@@ -46,7 +46,6 @@
         var max = document.documentElement.scrollHeight - window.innerHeight;
         progressBar.style.transform = "scaleX(" + (max > 0 ? y / max : 0) + ")";
       }
-      updateManifesto();
       updateSystemScene();
       ticking = false;
     });
@@ -128,7 +127,7 @@
 
   if (slides.length) restartSlideTimer();
 
-  // Pause the slideshow when the hero is off screen — no wasted work.
+  // Pause the slideshow when the hero is off screen, no wasted work.
   if ("IntersectionObserver" in window && hero) {
     new IntersectionObserver(function (entries) {
       entries.forEach(function (e) {
@@ -165,41 +164,6 @@
     revealEls.forEach(function (el) { io.observe(el); });
   } else {
     revealEls.forEach(function (el) { el.classList.add("is-visible"); });
-  }
-
-  /* ---------- Manifesto: words light up as you scroll ---------- */
-  var manifesto = document.getElementById("manifesto");
-  var manifestoWords = [];
-  var HOT_WORDS = ["head.", "doesn't.", "attention.", "until"];
-
-  if (manifesto) {
-    var text = manifesto.textContent.replace(/\s+/g, " ").trim();
-    manifesto.textContent = "";
-    text.split(" ").forEach(function (word, i) {
-      var span = document.createElement("span");
-      span.className = "mword" + (HOT_WORDS.indexOf(word) !== -1 ? " mword--hot" : "");
-      span.textContent = word;
-      manifesto.appendChild(span);
-      if (i < text.split(" ").length - 1) manifesto.appendChild(document.createTextNode(" "));
-      manifestoWords.push(span);
-    });
-  }
-
-  function updateManifesto() {
-    if (!manifesto || !manifestoWords.length || prefersReduced) return;
-    var rect = manifesto.getBoundingClientRect();
-    var vh = window.innerHeight;
-    // Progress: 0 when the block enters the lower third, 1 when its bottom
-    // passes the upper third. Words light in reading order.
-    var start = vh * 0.85;
-    var end = vh * 0.25;
-    var total = rect.height + (start - end);
-    var passed = start - rect.top;
-    var progress = Math.max(0, Math.min(1, passed / total));
-    var litCount = Math.floor(progress * manifestoWords.length * 1.15);
-    manifestoWords.forEach(function (w, i) {
-      w.classList.toggle("is-lit", i < litCount);
-    });
   }
 
   /* ---------- System scene: chips converge into the core ---------- */
