@@ -189,7 +189,8 @@
       var t = Math.max(0, Math.min(1, (p1 - lag) / (1 - lag)));
       var remain = 1 - t;
       chip.style.transform =
-        "translate(calc(var(--tx) * " + remain.toFixed(4) + "), calc(var(--ty) * " + remain.toFixed(4) + "))" +
+        "translate(-50%, -50%)" +
+        " translate(calc(var(--tx) * " + remain.toFixed(4) + "), calc(var(--ty) * " + remain.toFixed(4) + "))" +
         " rotate(calc(var(--r) * " + remain.toFixed(4) + "))" +
         " scale(" + (1 - 0.55 * t).toFixed(4) + ")";
       chip.style.opacity = String(1 - 0.92 * t);
