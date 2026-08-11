@@ -257,6 +257,37 @@
     }, { threshold: 0.35 }).observe(texasMap);
   }
 
+  /* ---------- FAQ accordion ---------- */
+  var faqItems = Array.prototype.slice.call(document.querySelectorAll(".faq-item"));
+  faqItems.forEach(function (item) {
+    var q = item.querySelector(".faq-item__q");
+    var a = item.querySelector(".faq-item__a");
+    if (!q || !a) return;
+    q.setAttribute("aria-expanded", "false");
+    q.addEventListener("click", function () {
+      var open = item.classList.contains("is-open");
+      faqItems.forEach(function (other) {
+        other.classList.remove("is-open");
+        var oa = other.querySelector(".faq-item__a");
+        var oq = other.querySelector(".faq-item__q");
+        if (oa) oa.style.maxHeight = "";
+        if (oq) oq.setAttribute("aria-expanded", "false");
+      });
+      if (!open) {
+        item.classList.add("is-open");
+        a.style.maxHeight = a.scrollHeight + "px";
+        q.setAttribute("aria-expanded", "true");
+      }
+    });
+  });
+
+  /* ---------- Current page in nav ---------- */
+  var here = (location.pathname.split("/").pop() || "index.html");
+  document.querySelectorAll(".nav__links a").forEach(function (a) {
+    var target = a.getAttribute("href").split("#")[0];
+    if (target && target === here) a.classList.add("is-current");
+  });
+
   /* ---------- Initial paint ---------- */
   onScroll();
 })();

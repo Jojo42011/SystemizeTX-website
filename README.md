@@ -16,23 +16,34 @@ built custom, hosted and run by us.
   sticky "tools converge into one system" scene · staggered reveals · count-up stats ·
   self-drawing Texas map · full `prefers-reduced-motion` support.
 
-## Page structure
+## Site structure (multi page)
 
-Hero (city slideshow) → 01 The Problem → 02 The System → 03 The Outcomes →
-04 The Partnership → 05 The Process → 06 Texas → Booking (calendar embed) → Footer.
+- `index.html` — Hero (city slideshow) → The Problem → The System → The Outcomes →
+  The Partnership → The Process → Texas → Booking (calendar embed) → Footer
+- `about.html` — positioning, animated stats strip, four principles, who we serve,
+  cross links to the other pages
+- `services.html` — the three phase engagement with deliverables, what the system can
+  own, the every build ships with checklist, two engagement models (scoped in the
+  briefing, no pricing), and a seven question FAQ accordion
+- `case-studies.html` — five representative engagements in challenge → build → outcome
+  format with industry tags (anonymized, from the founders' build library)
 
+Header on every page: About Us · What We Do · Case Studies + the Book a briefing button.
 No pricing appears anywhere on the site by design. The close is the free operational
-briefing, booked via the calendar section.
+briefing, booked via the calendar section on the homepage.
 
 ## Stack
 
 Zero dependencies. Pure HTML + CSS + vanilla JS. No build step, no frameworks.
 
 ```
-index.html      the whole page
-css/style.css   design system + animations
-js/main.js      slideshow, scroll choreography, reveals
-assets/img/     hero photography (five Texas cities)
+index.html         the homepage
+about.html         About Us
+services.html      What We Do
+case-studies.html  Case Studies
+css/style.css      design system + animations
+js/main.js         slideshow, scroll choreography, reveals, FAQ accordion
+assets/img/        hero photography (five Texas cities)
 ```
 
 ## Run it
