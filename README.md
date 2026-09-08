@@ -49,9 +49,8 @@ python3 -m http.server 8080
 
 ## Contact and lead routing
 
-There is no calendar integration in this repository yet. The verified contact is
-**devon@systemizetx.com**, used as the fallback on every page and as the booking
-dialog's submit target.
+The verified contact is **devon@systemizetx.com**, used as the fallback on every page
+and as the booking dialog's submit target.
 
 Every booking CTA carries `data-book` and opens the routing dialog: step 1 sends you to
 the Calibration or 3PL page, or on to step 2, a four-field form that composes a mailto.
@@ -64,21 +63,23 @@ section. Email subjects carry industry context:
 | Calibration | `Profit and operations review request (Calibration)` |
 | 3PL | `Profit and operations review request (3PL)` |
 
-### Wiring up Cal.com
+### Cal.com
 
-The embed container `#my-cal-inline-systemize-discovery` and its card are final on all
-three booking sections. No `calLink` was supplied, so nothing is faked in the embed
-slot: it currently shows an honest note and the email fallback.
+| Page | Container | Calendar |
+|---|---|---|
+| Homepage | `my-cal-inline-systemize-discovery` | `devonbooker/calibration-review` |
+| Calibration | `my-cal-inline-calibration-review` | `devonbooker/calibration-review` |
+| 3PL | `my-cal-inline-3pl-review` | not supplied, shows the email fallback |
 
-To go live, paste the complete Cal.com inline snippet into the container, delete the
-`.stx-cal__pending` block, and remove the `data-cal-pending` attribute (that attribute
-is the only thing suppressing the container's specified `min-height`). Use Devon's
-calendar on the homepage and Calibration, and the cofounder's separate link on 3PL, and
-pass industry context as booking metadata so leads arrive tagged:
+Each live embed passes `metadata: { industry }` so leads arrive tagged. The homepage
+uses the calibration event type because that is the only link supplied so far; swap it
+for a general one when there is one.
 
-```js
-config: { metadata: { industry: "calibration" } }   // or "3pl"
-```
+To wire up 3PL, open `industries/3pl/index.html`, replace the `.stx-cal__pending` block
+and its `data-cal-pending` container with the same embed pattern used on the other two
+pages, and set `calLink` to the cofounder's link with a distinct `namespace`. The
+`data-cal-pending` attribute is the only thing suppressing the container's specified
+`min-height`, so it must come off when the calendar goes in.
 
 ## Analytics
 
@@ -122,11 +123,16 @@ Checked with headless Chromium across all six pages:
   the ring stops and reveals resolve immediately.
 - No em dashes or en dashes anywhere in the repository.
 
+Screenshots in `docs/screenshots/` are captured with the Cal.com embed blocked, since
+it cannot load in the capture environment. The booking slot appears empty there; on the
+live site it renders the calendar.
+
 ## Still open
 
 Listed in full under "Open items" in [BRAND.md](BRAND.md):
 
-1. **Cal.com is not live.** No calendar URLs were supplied.
+1. **Cal.com on the 3PL page.** The homepage and Calibration are live; 3PL still needs
+   the cofounder's calendar link.
 2. **3PL copy is provisional**, pending confirmation of the cofounder's specialty.
 3. **Case studies** are anonymized with figures removed and may still read as
    unverifiable proof.

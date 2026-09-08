@@ -403,15 +403,19 @@
           <span class="stx-cal__title">Pick a time with Devon</span>
           <span class="stx-cal__meta">30 minutes, video call</span>
         </div>
-        <!-- Cal.com inline embed mounts here. Paste the complete Cal.com
-             snippet with the calLink, and pass industry context as booking metadata. -->
-        <div id="my-cal-inline-systemize-discovery" data-cal-pending>
-          <div class="stx-cal__pending">
-            <svg class="stx-i stx-i--22" viewBox="0 0 24 24" aria-hidden="true"><use href="#i-timer"></use></svg>
-            <strong>Booking calendar connecting soon</strong>
-            <span>The calendar is not live yet. Email <a href="mailto:devon@systemizetx.com?subject=Profit%20and%20operations%20review%20request">devon@systemizetx.com</a> and a person will set the time by hand.</span>
-          </div>
-        </div>
+        <div id="my-cal-inline-systemize-discovery" class="stx-cal__embed"></div>
+        <script>
+        (function (C, A, L) { let p = function (a, ar) { a.q.push(ar); }; let d = C.document; C.Cal = C.Cal || function () { let cal = C.Cal; let ar = arguments; if (!cal.loaded) { cal.ns = {}; cal.q = cal.q || []; d.head.appendChild(d.createElement("script")).src = A; cal.loaded = true; } if (ar[0] === L) { const api = function () { p(api, arguments); }; const namespace = ar[1]; api.q = api.q || []; if (typeof namespace === "string") { cal.ns[namespace] = cal.ns[namespace] || api; p(cal.ns[namespace], ar); p(cal, ["initNamespace", namespace]); } else p(cal, ar); return; } p(cal, ar); }; })(window, "https://app.cal.com/embed/embed.js", "init");
+        Cal("init", "systemize-discovery", { origin: "https://app.cal.com" });
+        Cal.config = Cal.config || {};
+        Cal.config.forwardQueryParams = true;
+        Cal.ns["systemize-discovery"]("inline", {
+          elementOrSelector: "#my-cal-inline-systemize-discovery",
+          config: { layout: "month_view", useSlotsViewOnSmallScreen: "true", metadata: { industry: "general" } },
+          calLink: "devonbooker/calibration-review"
+        });
+        Cal.ns["systemize-discovery"]("ui", { hideEventTypeDetails: false, layout: "month_view" });
+        </script>
       </div></div>
     <p class="stx-book__fallback" data-reveal>Prefer email? <a href="mailto:devon@systemizetx.com?subject=Profit%20and%20operations%20review%20request">devon@systemizetx.com</a>. Replies come from a person, usually the same day.</p>
   </div>

@@ -586,11 +586,16 @@ h1 em, h2 em {
 .stx-cal__meta { font-size: 13px; color: var(--ink-muted); }
 /* border-box is required: width 100% plus padding would otherwise overflow
    the card by 48px and clip the calendar. */
-#my-cal-inline-systemize-discovery {
+/* Every Cal.com mount, whichever calendar it hosts. border-box is required:
+   width 100% plus padding would otherwise overflow the card by 48px and clip
+   the calendar. */
+[id^="my-cal-inline-"] {
   box-sizing: border-box; width: 100%; padding: 24px;
   min-height: min(760px, 110vh);
+  overflow: auto;
 }
-#my-cal-inline-systemize-discovery[data-cal-pending] { min-height: 0; }
+/* No calendar wired up yet: do not reserve the full embed height. */
+[id^="my-cal-inline-"][data-cal-pending] { min-height: 0; overflow: visible; }
 .stx-cal__pending {
   display: grid; place-items: center; align-content: center; gap: 10px;
   text-align: center; padding: 32px;
@@ -605,7 +610,7 @@ h1 em, h2 em {
 
 /* Two-column booking layout, used by the industry pages. */
 .stx-book2 { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 340px), 1fr)); gap: clamp(32px, 4vw, 56px); align-items: start; }
-.stx-book2 #my-cal-inline-systemize-discovery { width: auto; }
+.stx-book2 [id^="my-cal-inline-"] { width: auto; }
 
 /* --------------------------------------------------------------------------
    13. BOOKING DIALOG
