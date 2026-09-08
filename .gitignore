@@ -1,0 +1,19 @@
+# Font source packages must never be committed. This repository is public and
+# Vercel serves its root as static files, so anything here is publicly
+# downloadable on the domain. Only subsetted .woff2 web faces belong in
+# assets/fonts/, and only if the licence permits embedding them on a website.
+# See assets/fonts/README.md.
+*.zip
+*.dmg
+*.pkg
+*.otf
+*.ttf
+*.ttc
+*.eot
+
+# Keep the web faces themselves trackable.
+!assets/fonts/*.woff2
+
+# Local noise
+.DS_Store
+.vercel/
