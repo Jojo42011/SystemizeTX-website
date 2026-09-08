@@ -1,48 +1,30 @@
 # Fonts
 
-This directory is empty on purpose.
-
-The site requests SF Pro through `@font-face` rules in `css/style.css` that carry
-**`local()` sources only**. No font files are downloaded, embedded, or served. SF Pro
-therefore renders only on machines that already have it installed, and every other
-platform falls through the stack to Segoe UI, Helvetica Neue, Arial, or the system
-default.
-
-## Adding licensed webfont files
-
-Only add font files here if you hold a licence that permits embedding them on a public
-website. Apple's SF Pro package, as distributed on developer.apple.com, is licensed for
-designing and developing for Apple platforms and does not grant general web
-redistribution. That call belongs to whoever owns the licence, not to this repository.
-
-If you do have web embedding rights, drop the files here as `.woff2` (convert from
-`.otf` first) using these names:
+Inter, self hosted and subsetted to Latin, under the SIL Open Font License 1.1.
+`OFL.txt` is the licence and must stay alongside the font files.
 
 ```
-SFPro-Regular.woff2       weight 400
-SFPro-Medium.woff2        weight 500
-SFPro-Semibold.woff2      weight 600
-SFPro-Bold.woff2          weight 700
-SFPro-MediumItalic.woff2  weight 500, italic
+inter-400-normal.woff2    body copy
+inter-500-normal.woff2    labels, nav, buttons
+inter-600-normal.woff2    card titles, subheads
+inter-700-normal.woff2    H1 and H2
+inter-500-italic.woff2    the accent phrase ending every H1 and H2
 ```
 
-Then add a `url()` source ahead of nothing and behind every `local()` source in each
-`@font-face` block at the top of `css/style.css`, for example:
+Declared in the `@font-face` block at the top of `css/style.css`, with
+`font-display: swap`. The 400 and 700 faces are preloaded in every page head.
 
-```css
-@font-face{
-  font-family:"SF Pro";
-  font-weight:400;
-  font-style:normal;
-  font-display:swap;
-  src:local("SF Pro Text"),local("SF Pro Text Regular"),local("SFProText-Regular"),
-      url("../assets/fonts/SFPro-Regular.woff2") format("woff2");
-}
-```
+## Do not add SF Pro
 
-Keeping `local()` first means anyone who already has SF Pro installed uses their system
-copy and downloads nothing.
+SF Pro was the original design direction. It cannot be used here. Apple licenses it
+solely for creating mock-ups of interfaces running on Apple platforms, and the licence
+embedded in the font files says plainly that it may not be embedded in any product, nor
+used to create or display website content. That applies regardless of the `fsType` bit
+in the files, which Apple left at its permissive default.
 
-The italic face matters: every H1 and H2 ends with an italic medium accent phrase, which
-is the signature typographic move. Without a real italic the browser will synthesise a
-slanted upright, which looks wrong at large sizes.
+Inter was drawn on close to the same proportions and is licensed for exactly this use.
+
+The repository's `.gitignore` blocks `.otf`, `.ttf`, `.dmg`, `.pkg` and `.zip` so font
+source packages cannot be committed by accident. This repository is public and Vercel
+serves its root as static files, so anything committed here is downloadable on the live
+domain.

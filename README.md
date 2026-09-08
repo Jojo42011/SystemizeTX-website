@@ -89,11 +89,10 @@ and check it is not already present before adding another.
 ## Editing
 
 - **Tokens** live at the top of `css/style.css`. Change a value there, never inline.
-- **Fonts:** SF Pro is aliased to locally installed faces through `@font-face` with
-  `local()` sources only. No font files are shipped, so the face varies by platform:
-  SF Pro on Apple, Segoe UI on Windows, Helvetica Neue or Arial elsewhere. To make it
-  identical everywhere you have to serve licensed `.woff2` files. `assets/fonts/README.md`
-  has the exact file names and the `@font-face` change.
+- **Fonts:** Inter, self hosted from `assets/fonts/`, subsetted to Latin, SIL Open Font
+  License 1.1. Five faces: 400, 500, 600, 700 upright and 500 italic, about 124KB total.
+  Rendering is identical on every platform. SF Pro was the original direction and cannot
+  be used: Apple's licence forbids embedding it or using it for website content.
 - **Icons** are Lucide (ISC), inlined as a `<symbol>` sprite per page. Nothing is
   fetched from a CDN at runtime.
 - **Shared markup:** the header, footer, booking dialog, and icon sprite are duplicated
@@ -104,10 +103,10 @@ and check it is not already present before adding another.
 Checked with headless Chromium across all six pages:
 
 - All six routes plus the three redirect stubs return 200 and render.
-- No horizontal overflow at 320, 390, 768, 901, 909, or 1440px.
+- No horizontal overflow at 320, 390, 768, 909, 961, 1000, or 1440px.
 - Header nav stays visible and on one line down to 901px and swaps to the burger at
-  900px. The widest lockup ("Systemize TX | Calibration") is 232px, the nav 525px, and
-  the container 811px at a 901px viewport, so it fits with room to spare.
+  960px. The widest lockup ("Systemize TX | Calibration") is 244px and the nav 570px,
+  needing 838px, which the container only reaches at a 931px viewport.
 - No console errors, page errors, or failed requests.
 - Zero WCAG AA contrast failures across every rendered text and background pair.
 - One `<h1>` per page, no skipped heading levels, `main`/`header`/`footer` landmarks.
@@ -138,5 +137,4 @@ Listed in full under "Open items" in [BRAND.md](BRAND.md):
 3. **Case studies** are anonymized with figures removed and may still read as
    unverifiable proof.
 4. **Founder information.** None exists in this repository, so none was invented.
-5. **Fonts** render differently per platform, because no font files are served. Fixing
-   that needs licensed `.woff2` assets: see `assets/fonts/README.md`.
+5. **Fonts** are resolved: Inter is self hosted and renders identically everywhere.

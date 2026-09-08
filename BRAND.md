@@ -36,9 +36,13 @@ Every value below is the one the site is actually built on. Change it here and i
 Icons are monochrome navy on a warm paper tile. There are no multicolor icon tiles: an earlier direction used teal, amber, violet and blue accents, and the final design dropped them. Body text is never lighter than #5D667A. Bright blue is a supporting color only, never the primary identity.
 
 ## Typography
-Stack: `"SF Pro", -apple-system, BlinkMacSystemFont, "SF Pro Display", "SF Pro Text", "Segoe UI", "Helvetica Neue", Arial, sans-serif`, where `"SF Pro"` is aliased to locally installed faces through `@font-face` with `local()` sources only. No font files are shipped, downloaded or embedded, so SF Pro renders only where it is already installed: Apple devices get SF Pro, Windows gets Segoe UI, and everything else lands on Helvetica Neue or Arial rather than an arbitrary system default. Appearance therefore varies by platform, by design.
+Face: **Inter**, self hosted and subsetted to Latin, under the SIL Open Font License 1.1. Five faces are served, matching the weights the design uses: 400, 500, 600 and 700 upright, plus 500 italic. Roughly 124KB total. The licence ships alongside them in `assets/fonts/OFL.txt`, as the OFL requires.
 
-To make it identical everywhere, licensed `.woff2` files have to be served. See `assets/fonts/README.md` for the file names and the `@font-face` change, and note that whether SF Pro may be embedded on a public site is a licensing decision for the licence holder, not something this repository assumes.
+Stack: `"Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", "Helvetica Neue", Arial, sans-serif`. Inter loads on every platform, so rendering is identical everywhere. The system faces behind it apply only if the webfont fails to load.
+
+SF Pro was the original direction and is not used. Apple licenses it solely for mock-ups of interfaces running on Apple platforms, and the licence embedded in the font files states that it may not be embedded, nor used to display website content. Inter was drawn on close to the same proportions and is licensed for exactly this use. Do not reintroduce SF Pro webfont files.
+
+Inter is slightly wider than SF Pro. That is why the header breakpoint is 960px rather than the 900px the original design called for: see Layout.
 
 | Role | Size | Weight | Line height | Tracking | Color |
 |---|---|---|---|---|---|
@@ -64,6 +68,7 @@ Headline accent: each H1 and H2 ends with an `<em>` phrase in italic, weight 500
 - Card padding 24px standard, `clamp(24px, 3vw, 36px)` for large cards. Grid gap 16px between cards; `36px clamp(40px, 6vw, 96px)` between heading and content columns.
 - Copy widths: hero lede 560px, side intro 340px, body max 620px, ring caption 44ch.
 - Section rhythm: white, paper, white. Paper bands carry 1px top and bottom borders. Never two paper sections in a row.
+- **Header breakpoint 960px.** The desktop nav needs 838px: 244px for the widest lockup ("Systemize TX | Calibration"), 570px of nav, and the 24px bar gap. The container is 0.9 x viewport below 960px, so it only reaches 838px at a 931px viewport. The swap is CSS only; both navs are in the markup. Changing the typeface changes this number, so re-measure if the face ever changes.
 - **Odd-count rule:** in any two-column grid with an odd number of children, the last child spans the full row (`grid-column: 1 / -1`). Otherwise it strands with dead space beside it.
 
 ## Radius

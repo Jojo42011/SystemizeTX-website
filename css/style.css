@@ -7,16 +7,21 @@
 
 /* --------------------------------------------------------------------------
    1. FONTS
-   SF Pro is the intended face, used only when it is already installed on the
-   reader's machine. No font files are downloaded, embedded or redistributed.
-   If licensed webfont assets are ever placed in assets/fonts/, add real
-   url() sources below, keeping the local() sources first.
+   Inter, self hosted, subsetted to Latin. SIL Open Font License 1.1, which
+   permits embedding on a public site. The licence ships alongside the files
+   in assets/fonts/OFL.txt, as the OFL requires.
+
+   Inter is used in place of SF Pro deliberately. SF Pro is licensed by Apple
+   solely for mock-ups of interfaces running on Apple platforms, and its
+   licence states plainly that it may not be embedded or used to display
+   website content. Inter was drawn on close to the same proportions and
+   renders identically on every platform, which SF Pro never could.
    -------------------------------------------------------------------------- */
-@font-face{font-family:"SF Pro";font-weight:400;font-style:normal;font-display:swap;src:local("SF Pro Text"),local("SF Pro Text Regular"),local("SFProText-Regular"),local("SF Pro Display"),local("SFProDisplay-Regular"),local("SF Pro"),local(".SFNS-Regular")}
-@font-face{font-family:"SF Pro";font-weight:500;font-style:normal;font-display:swap;src:local("SF Pro Text Medium"),local("SFProText-Medium"),local("SF Pro Display Medium"),local("SFProDisplay-Medium"),local(".SFNS-Medium")}
-@font-face{font-family:"SF Pro";font-weight:600;font-style:normal;font-display:swap;src:local("SF Pro Display Semibold"),local("SFProDisplay-Semibold"),local("SF Pro Text Semibold"),local("SFProText-Semibold"),local(".SFNS-Semibold")}
-@font-face{font-family:"SF Pro";font-weight:700;font-style:normal;font-display:swap;src:local("SF Pro Display Bold"),local("SFProDisplay-Bold"),local("SF Pro Text Bold"),local("SFProText-Bold"),local(".SFNS-Bold")}
-@font-face{font-family:"SF Pro";font-weight:500;font-style:italic;font-display:swap;src:local("SF Pro Display Medium Italic"),local("SFProDisplay-MediumItalic"),local("SF Pro Text Medium Italic"),local("SFProText-MediumItalic"),local(".SFNS-MediumItalic")}
+@font-face{font-family:"Inter";font-style:normal;font-weight:400;font-display:swap;src:url("../assets/fonts/inter-400-normal.woff2") format("woff2")}
+@font-face{font-family:"Inter";font-style:normal;font-weight:500;font-display:swap;src:url("../assets/fonts/inter-500-normal.woff2") format("woff2")}
+@font-face{font-family:"Inter";font-style:normal;font-weight:600;font-display:swap;src:url("../assets/fonts/inter-600-normal.woff2") format("woff2")}
+@font-face{font-family:"Inter";font-style:normal;font-weight:700;font-display:swap;src:url("../assets/fonts/inter-700-normal.woff2") format("woff2")}
+@font-face{font-family:"Inter";font-style:italic;font-weight:500;font-display:swap;src:url("../assets/fonts/inter-500-italic.woff2") format("woff2")}
 
 /* --------------------------------------------------------------------------
    2. TOKENS
@@ -44,8 +49,10 @@
   --ring-guide:  #EAECF1;
 
   /* Type */
-  --font-sans: "SF Pro", -apple-system, BlinkMacSystemFont, "SF Pro Display",
-               "SF Pro Text", "Segoe UI", "Helvetica Neue", Arial, sans-serif;
+  /* Inter loads on every platform, so rendering is identical everywhere.
+     The system faces behind it only apply if the webfont fails to load. */
+  --font-sans: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI",
+               "Helvetica Neue", Arial, sans-serif;
 
   --fs-hero-h1:  clamp(44px, 6.2vw, 84px);
   --fs-page-h1:  clamp(40px, 5.4vw, 72px);
@@ -208,7 +215,7 @@ h1 em, h2 em {
 /* --------------------------------------------------------------------------
    5. LOGO
    -------------------------------------------------------------------------- */
-.stx-logo { display: inline-flex; align-items: center; gap: 10px; color: var(--navy); }
+.stx-logo { display: inline-flex; align-items: center; gap: 10px; color: var(--navy); flex: none; }
 .stx-logo:hover { color: var(--navy); }
 .stx-logo__star { flex: none; color: var(--red); fill: currentColor; width: 20px; height: 20px; }
 .stx-logo__word { font-size: 18px; font-weight: 600; letter-spacing: -0.01em; color: var(--navy); line-height: 1; }
@@ -390,7 +397,16 @@ h1 em, h2 em {
 .stx-nav-m a:not(.stx-btn):hover { color: var(--navy); }
 .stx-nav-m .stx-btn { margin-top: 20px; }
 
-@media (max-width: 900px) {
+/* Breakpoint is CSS only: both navs are in the markup and this swaps them.
+   Deciding it in JS is what previously rendered the mobile header on desktop.
+
+   Why 960px. The desktop nav needs 838px: 244px for the widest lockup
+   ("Systemize TX | Calibration") plus 570px of nav plus the 24px bar gap.
+   The container is 0.9 x viewport below 960px, so it only reaches 838px at
+   a 931px viewport. 960px leaves 26px of slack. The original 900px was
+   calculated against SF Pro, which is narrower than Inter; at 901px the
+   lockup was being squeezed by 27px to fit. */
+@media (max-width: 960px) {
   .stx-nav-d { display: none; }
   .stx-burger { display: grid; }
   .stx-header.is-menu-open .stx-nav-m { display: block; }
