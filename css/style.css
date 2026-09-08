@@ -45,7 +45,7 @@
 
   /* Type */
   --font-sans: "SF Pro", -apple-system, BlinkMacSystemFont, "SF Pro Display",
-               "SF Pro Text", "Segoe UI", sans-serif;
+               "SF Pro Text", "Segoe UI", "Helvetica Neue", Arial, sans-serif;
 
   --fs-hero-h1:  clamp(44px, 6.2vw, 84px);
   --fs-page-h1:  clamp(40px, 5.4vw, 72px);

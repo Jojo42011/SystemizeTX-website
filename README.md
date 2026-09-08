@@ -90,9 +90,10 @@ and check it is not already present before adding another.
 
 - **Tokens** live at the top of `css/style.css`. Change a value there, never inline.
 - **Fonts:** SF Pro is aliased to locally installed faces through `@font-face` with
-  `local()` sources only. No font files are shipped. If licensed webfont assets are ever
-  placed in `assets/fonts/`, add real `url()` sources with `woff2` first and
-  `font-display: swap`, keeping the `local()` sources ahead of them.
+  `local()` sources only. No font files are shipped, so the face varies by platform:
+  SF Pro on Apple, Segoe UI on Windows, Helvetica Neue or Arial elsewhere. To make it
+  identical everywhere you have to serve licensed `.woff2` files. `assets/fonts/README.md`
+  has the exact file names and the `@font-face` change.
 - **Icons** are Lucide (ISC), inlined as a `<symbol>` sprite per page. Nothing is
   fetched from a CDN at runtime.
 - **Shared markup:** the header, footer, booking dialog, and icon sprite are duplicated
@@ -137,4 +138,5 @@ Listed in full under "Open items" in [BRAND.md](BRAND.md):
 3. **Case studies** are anonymized with figures removed and may still read as
    unverifiable proof.
 4. **Founder information.** None exists in this repository, so none was invented.
-5. **Fonts** render differently per platform.
+5. **Fonts** render differently per platform, because no font files are served. Fixing
+   that needs licensed `.woff2` assets: see `assets/fonts/README.md`.

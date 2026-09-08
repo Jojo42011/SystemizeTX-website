@@ -36,7 +36,9 @@ Every value below is the one the site is actually built on. Change it here and i
 Icons are monochrome navy on a warm paper tile. There are no multicolor icon tiles: an earlier direction used teal, amber, violet and blue accents, and the final design dropped them. Body text is never lighter than #5D667A. Bright blue is a supporting color only, never the primary identity.
 
 ## Typography
-Stack: `"SF Pro", -apple-system, BlinkMacSystemFont, "SF Pro Display", "SF Pro Text", "Segoe UI", sans-serif`, where `"SF Pro"` is aliased to locally installed faces through `@font-face` with `local()` sources only. No font files are shipped, downloaded or embedded. SF Pro renders on Apple devices, Segoe UI on Windows, the platform default elsewhere, so appearance varies by platform.
+Stack: `"SF Pro", -apple-system, BlinkMacSystemFont, "SF Pro Display", "SF Pro Text", "Segoe UI", "Helvetica Neue", Arial, sans-serif`, where `"SF Pro"` is aliased to locally installed faces through `@font-face` with `local()` sources only. No font files are shipped, downloaded or embedded, so SF Pro renders only where it is already installed: Apple devices get SF Pro, Windows gets Segoe UI, and everything else lands on Helvetica Neue or Arial rather than an arbitrary system default. Appearance therefore varies by platform, by design.
+
+To make it identical everywhere, licensed `.woff2` files have to be served. See `assets/fonts/README.md` for the file names and the `@font-face` change, and note that whether SF Pro may be embedded on a public site is a licensing decision for the licence holder, not something this repository assumes.
 
 | Role | Size | Weight | Line height | Tracking | Color |
 |---|---|---|---|---|---|
